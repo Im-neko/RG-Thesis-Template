@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  hub:
+    image: selenium/hub:2.44.0
+    ports:
+      - "4444:4444"
+    volumes:
+      - ../:/src
+
+  chrome:
+    image: selenium/node-chrome-debug:2.44.0
+    ports:
+      - "15900:5900"
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    volumes:
+      - /dev/urandom:/dev/random
+      - ../:/src
+    links:
+      - hub
+
+  uploader:
+    image: imneko/thesis-uploader
+    environment:
+      LOGIN_ID: $LOGIN_ID
+      LOGIN_PASS: $LOGIN_PASS
+      FILE_TITLE: $FILE_TITLE
+    links:
+      - hub
