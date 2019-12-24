@@ -6,7 +6,7 @@ chike0905さんが作ったやつをdockerで動くようにして環境構築�
 環境部分以外はそのままです。  
 SFSにアップロードするくんを追加しました． 
 詳細はこちらを見てください  
-https://hub.docker.com/repository/docker/imneko/thesis-uploader/general
+https://github.com/Im-neko/RG-Thesis-Template/tree/master/sotsuron-push#readme
 
 
 # Requirement
