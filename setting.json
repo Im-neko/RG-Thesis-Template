@@ -1,0 +1,59 @@
+{
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "compile",
+        "tools": [
+          "platex",
+          "pbibtex",
+          "platex",
+          "platex",
+          "dvipdfmx"
+        ]
+      }
+    ],
+    "latex-workshop.latex.tools": [
+      {
+        "name": "platex",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "platex",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "pbibtex",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "pbibtex",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "dvipdfmx",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "dvipdfmx",
+          "%DOC%"
+        ]
+      }
+    ],
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.view.pdf.viewer": "browser",
+    "window.zoomLevel": 0
+  }

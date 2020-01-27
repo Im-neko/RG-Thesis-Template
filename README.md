@@ -41,3 +41,68 @@ $ git push origin gh-pages:gh-pages
 ```
 
 Anyone can download and review your newest thesis on http://your_github_username.github.io/thesis/thesis.pdf now!
+
+## 5.VSCode setting file
+VSCodeで自動コンパイルするようのセッティングファイルを追加しました．
+LaTex WorkShopを追加後以下の内容でsetting.jsonを上書きするとdockerのlatex環境を利用した自動コンパイルを行ってくれる．
+```
+{
+    "latex-workshop.latex.recipes": [
+      {
+        "name": "compile",
+        "tools": [
+          "platex",
+          "pbibtex",
+          "platex",
+          "platex",
+          "dvipdfmx"
+        ]
+      }
+    ],
+    "latex-workshop.latex.tools": [
+      {
+        "name": "platex",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "platex",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "pbibtex",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "pbibtex",
+          "%DOC%"
+        ]
+      },
+      {
+        "name": "dvipdfmx",
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "-v",
+          "%DIR%:/workdir",
+          "paperist/alpine-texlive-ja",
+          "dvipdfmx",
+          "%DOC%"
+        ]
+      }
+    ],
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.view.pdf.viewer": "browser",
+    "window.zoomLevel": 0,
+  }
+```
